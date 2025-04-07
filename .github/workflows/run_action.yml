@@ -19,6 +19,10 @@ jobs:
         with:
           python-version: 3.9
 
+      - name: Install TA-Lib via pip
+        run: |
+          pip install TA-Lib
+
       - name: Install system dependencies (build TA-Lib)
         run: |
           sudo apt-get update
