@@ -34,7 +34,7 @@ jobs:
 
       # 5. Guarda el archivo de salida como artifact
       - name: Upload output notebook
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: BreakOut_Indicator_output_notebook
           path: notebooks/BreakOut_Indicator_v8_output.ipynb
