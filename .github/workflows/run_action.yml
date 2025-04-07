@@ -26,7 +26,7 @@ jobs:
           wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
           tar -xzvf ta-lib-0.4.0-src.tar.gz
           cd ta-lib
-          ./configure --prefix=/usr/local  # Cambiado para asegurar que se instala en /usr/local
+          ./configure --prefix=/usr/local
           make
           sudo make install
           cd ..
@@ -35,9 +35,11 @@ jobs:
           export LIBRARY_PATH=/usr/local/lib:$LIBRARY_PATH
           export CPATH=/usr/local/include:$CPATH
 
-
       - name: Install Python dependencies
         run: |
+          export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+          export LIBRARY_PATH=/usr/local/lib:$LIBRARY_PATH
+          export CPATH=/usr/local/include:$CPATH
           python -m pip install --upgrade pip
           pip install wheel
           pip install TA-Lib
