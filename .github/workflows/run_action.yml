@@ -1,10 +1,10 @@
-name: Run Specific Notebooks Every 5 Minutes
+name: Run Notebook at Midnight
 
 on:
   schedule:
-    # Programación para ejecutar cada 5 minutos
+    # Se ejecuta todos los días a medianoche (UTC)
     - cron: "0 0 * * *"
-  workflow_dispatch: # Permite ejecución manual si es necesario
+  workflow_dispatch:  # Permite ejecución manual si es necesario
 
 jobs:
   run-notebooks:
@@ -26,15 +26,14 @@ jobs:
           pip install jupyter ipykernel papermill
 
       - name: Register Python kernel
-        run: python -m ipykernel install --user --name=python3
+        run: python -m ipykernel install --user --name python3
 
-      - name: Run notebooks
+      - name: Run notebook
         run: |
-          papermill notebooks/BreakOut_Indicator_v8.ipynb notebooks/BreakOut_Indicator_v8_output.ipynb -k python3
+          papermill notebooks/BreakOut_Indicator_v8.ipynb notebooks/breakout_output.ipynb -k python3
 
-      # 5. Guarda el archivo de salida como artifact
       - name: Upload output notebook
         uses: actions/upload-artifact@v3
         with:
-          name: BreakOut_Indicator_output_notebook
-          path: notebooks/BreakOut_Indicator_v8_output.ipynb
+          name: breakout_output_notebook
+          path: notebooks/breakout_output.ipynb
