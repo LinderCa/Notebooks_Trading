@@ -33,7 +33,7 @@ jobs:
           papermill notebooks/BreakOut_Indicator_v8.ipynb notebooks/breakout_output.ipynb -k python3
 
       - name: Upload output notebook
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: breakout_output_notebook
           path: notebooks/breakout_output.ipynb
