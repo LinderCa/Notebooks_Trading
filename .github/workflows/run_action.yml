@@ -18,8 +18,8 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: 3.9
-
-      - name: Install TA-Lib dependencies
+          
+      - name: Install system and Python dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential wget
@@ -30,21 +30,16 @@ jobs:
           make
           sudo make install
           cd ..
-          # Aseguramos que el compilador pueda encontrar la librería
           export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
           export LIBRARY_PATH=/usr/local/lib:$LIBRARY_PATH
           export CPATH=/usr/local/include:$CPATH
 
-      - name: Install Python dependencies
-        run: |
-          export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-          export LIBRARY_PATH=/usr/local/lib:$LIBRARY_PATH
-          export CPATH=/usr/local/include:$CPATH
           python -m pip install --upgrade pip
           pip install wheel
           pip install TA-Lib
           pip install -r requirements.txt
           pip install jupyter ipykernel papermill
+
 
       - name: Register Python kernel
         run: python -m ipykernel install --user --name python3
