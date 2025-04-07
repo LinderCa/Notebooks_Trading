@@ -29,6 +29,8 @@ jobs:
           ./configure --prefix=/usr
           make
           sudo make install
+          echo "/usr/lib" | sudo tee -a /etc/ld.so.conf.d/ta-lib.conf
+          sudo ldconfig
 
       - name: Install dependencies
         run: |
