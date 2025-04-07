@@ -1,39 +1,48 @@
-name: Run Notebook at Midnight
+name: Run breakout notebook
 
 on:
-  schedule:
-    # Se ejecuta todos los días a medianoche (UTC)
-    - cron: "0 0 * * *"
-  workflow_dispatch:  # Permite ejecución manual si es necesario
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
-  run-notebooks:
-    runs-on: ubuntu-latest
+  run-notebook:
+    runs-on: ubuntu-latest  # Esto es Ubuntu 24.04
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout repo
+      uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.9
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
 
-      - name: Install TA-Lib and Python dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libta-lib0 libta-lib-dev python3-dev build-essential
+    - name: Install TA-Lib from source
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential wget python3-dev
 
-          pip install --upgrade pip
-          pip install TA-Lib
-          pip install -r requirements.txt
-          pip install jupyter ipykernel papermill
+        wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
+        tar -xvzf ta-lib-0.4.0-src.tar.gz
+        cd ta-lib/
+        ./configure --prefix=/usr
+        make
+        sudo make install
 
-      - name: Register Python kernel
-        run: python -m ipykernel install --user --name python3
+    - name: Install Python dependencies
+      run: |
+        export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH
+        export CFLAGS="-I/usr/include"
+        export LDFLAGS="-L/usr/lib"
 
-      - name: Run notebook
-        run: |
-          papermill notebooks/BreakOut_Indicator_v8.ipynb notebooks/breakout_output.ipynb -k python3
+        python -m pip install --upgrade pip
+        pip install TA-Lib
+        pip install -r requirements.txt
+        pip install jupyter ipykernel papermill
+
+    - name: Run notebook
+      run: |
+        papermill notebooks/BreakOut_Indicator_v8.ipynb notebooks/breakout_output.ipynb -k python3
 
       
