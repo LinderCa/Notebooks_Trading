@@ -37,9 +37,9 @@ jobs:
         export LDFLAGS="-L/usr/lib"
 
         python -m pip install --upgrade pip
-        pip install TA-Lib
-        pip install -r requirements.txt
-        pip install jupyter ipykernel papermill
+        conda install TA-Lib
+        conda install -r requirements.txt
+        conda install jupyter ipykernel papermill
 
     - name: Run notebook
       run: |
