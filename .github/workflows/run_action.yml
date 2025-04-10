@@ -20,7 +20,7 @@ jobs:
 
     - name: Install Python dependencies
       run: |
-        conda install jupyter ipykernel papermill
+        pip install jupyter ipykernel papermill
 
     - name: Run notebook
       run: |
