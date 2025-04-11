@@ -19,12 +19,12 @@ jobs:
           auto-activate-base: false
           activate-environment: myenv
           environment-name: myenv
-          python-version: 3.10
+          python-version: '3.10'     # <-- ¡importante! Entre comillas
           channels: conda-forge
 
       - name: Instalar dependencias y ejecutar notebook
         shell: bash -l {0}
         run: |
-          conda install -y papermill ipykernel pandas numpy scikit-learn yfinance
+          conda install -y pip papermill ipykernel pandas numpy scikit-learn yfinance
           python -m ipykernel install --user --name python3
           papermill notebooks/BreakOut_Indicator_v9.ipynb /dev/null -k python3
