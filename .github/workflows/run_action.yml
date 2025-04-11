@@ -13,22 +13,18 @@ jobs:
       - name: Clonar repositorio
         uses: actions/checkout@v3
 
-      - name: Configurar Conda
+      - name: Configurar Miniconda
         uses: conda-incubator/setup-miniconda@v2
         with:
-          conda-version: 'latest'  # Puedes elegir una versión específica de Conda
-          environment-file: environment.yml  # Este archivo define el entorno conda
+          auto-activate-base: false
+          activate-environment: myenv
+          environment-name: myenv
+          python-version: 3.10
+          channels: conda-forge
 
-      - name: Instalar dependencias con Conda
+      - name: Instalar dependencias y ejecutar notebook
+        shell: bash -l {0}
         run: |
-          conda env create -f environment.yml  # Crear el entorno Conda desde el archivo environment.yml
-          conda activate myenv  # Activar el entorno Conda
-
-      - name: Instalar papermill
-        run: |
-          conda install -c conda-forge papermill  # Instalar papermill dentro del entorno Conda
-
-      - name: Ejecutar notebook
-        run: |
-          conda activate myenv  # Asegúrate de activar el entorno de Conda antes de ejecutar el notebook
+          conda install -y papermill ipykernel pandas numpy scikit-learn yfinance
+          python -m ipykernel install --user --name python3
           papermill notebooks/BreakOut_Indicator_v9.ipynb /dev/null -k python3
