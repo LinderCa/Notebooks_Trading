@@ -1,29 +1,35 @@
-name: Run breakout notebook
+name: Ejecutar Notebook
 
 on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+  schedule:
+    - cron: "0 12 * * *"  # Cada día a las 12:00 UTC (opcional)
+  workflow_dispatch:      # Para ejecutarlo manualmente desde GitHub
 
 jobs:
-  run-notebook:
-    runs-on: ubuntu-latest  # Esto es Ubuntu 24.04
+  ejecutar:
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
+      - name: Cachear paquetes de pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
-    - name: Install Python dependencies
-      run: |
-        pip install jupyter ipykernel papermill
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
-    - name: Run notebook
-      run: |
-        papermill notebooks/BreakOut_Indicator_v8.ipynb notebooks/breakout_output.ipynb -k python3
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
 
-      
+      - name: Ejecutar notebook
+        run: |
+          pip install nbconvert
+          jupyter nbconvert --to notebook --execute BreakOut_Indicator_v9.ipynb --output notebook_resultado.ipynb
