@@ -32,4 +32,4 @@ jobs:
       - name: Ejecutar notebook
         run: |
           pip install nbconvert
-          jupyter nbconvert --to notebook --execute BreakOut_Indicator_v9.ipynb --output notebook_resultado.ipynb
+          jupyter nbconvert --to notebook --execute notebooks/BreakOut_Indicator_v9.ipynb --output notebook_resultado.ipynb
