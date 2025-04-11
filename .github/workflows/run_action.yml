@@ -13,28 +13,22 @@ jobs:
       - name: Clonar repositorio
         uses: actions/checkout@v3
 
-      - name: Cachear paquetes de pip
-        uses: actions/cache@v3
+      - name: Configurar Conda
+        uses: conda-incubator/setup-miniconda@v2
         with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+          conda-version: 'latest'  # Puedes elegir una versión específica de Conda
+          environment-file: environment.yml  # Este archivo define el entorno conda
 
-      - name: Configurar Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Instalar dependencias
+      - name: Instalar dependencias con Conda
         run: |
-          pip install -r requirements.txt
-          pip install papermill ipykernel
+          conda env create -f environment.yml  # Crear el entorno Conda desde el archivo environment.yml
+          conda activate myenv  # Activar el entorno Conda
 
-      - name: Registrar kernel para papermill
+      - name: Instalar papermill
         run: |
-          python -m ipykernel install --user --name python3
+          conda install -c conda-forge papermill  # Instalar papermill dentro del entorno Conda
 
       - name: Ejecutar notebook
         run: |
+          conda activate myenv  # Asegúrate de activar el entorno de Conda antes de ejecutar el notebook
           papermill notebooks/BreakOut_Indicator_v9.ipynb /dev/null -k python3
