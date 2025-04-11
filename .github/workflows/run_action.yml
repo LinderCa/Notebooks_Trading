@@ -37,4 +37,4 @@ jobs:
 
       - name: Ejecutar notebook
         run: |
-          papermill notebooks/BreakOut_Indicator_v8.ipynb /dev/null -k python3
+          papermill notebooks/BreakOut_Indicator_v9.ipynb /dev/null -k python3
