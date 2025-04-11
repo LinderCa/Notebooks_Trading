@@ -29,7 +29,6 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
 
-      - name: Ejecutar notebook
+      - name: Run notebook
         run: |
-          pip install nbconvert
-          jupyter nbconvert --to notebook --execute notebooks/BreakOut_Indicator_v9.ipynb --output notebook_resultado.ipynb
+          papermill notebooks/BreakOut_Indicator_v8.ipynb notebooks/breakout_output.ipynb -k python3
