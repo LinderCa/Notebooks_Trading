@@ -29,3 +29,12 @@ jobs:
           pip install backtesting
           python -m ipykernel install --user --name python3
           papermill notebooks/BreakOut_Indicator_v9.ipynb /dev/null -k python3
+      
+      - name: subir cambios al repo
+        shell: bash -l {0}
+        run: |
+          git config --global user.email "casaslinder@gmail.com"
+          git config --global user.name "LinderCasas"
+          git add notebooks/data/cb_h.txt
+          git commit -m "Actualizar resultados del notebook"
+          git push
