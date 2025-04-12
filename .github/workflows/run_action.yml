@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Clonar repositorio
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false
 
       - name: Configurar Miniconda
         uses: conda-incubator/setup-miniconda@v2
