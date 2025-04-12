@@ -33,7 +33,7 @@ jobs:
       - name: subir cambios al repo
         shell: bash -l {0}
         env:
-          TOKEN: ${{ secrets.GIT_ACTION_PUSH }}
+          TOKEN: ${{ secrets.GIT_ACTION }}
         run: |
           git config --global user.email "casaslinder@gmail.com"
           git config --global user.name "LinderCasas"
