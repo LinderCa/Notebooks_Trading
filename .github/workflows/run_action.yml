@@ -32,10 +32,12 @@ jobs:
       
       - name: subir cambios al repo
         shell: bash -l {0}
+        env:
+          TOKEN: ${{ secrets.GIT_ACTION_PUSH }}
         run: |
           git config --global user.email "casaslinder@gmail.com"
           git config --global user.name "LinderCasas"
-          git remote set-url origin https://x-access-token:${secrets.GIT_ACTION_PUSH}@github.com/LinderCa/Notebooks_Trading.git
+          git remote set-url origin https://x-access-token:${TOKEN}@github.com/LinderCa/Notebooks_Trading.git
           git add notebooks/data/cb_h.txt
           git commit -m "Actualizar resultados del notebook"
           git push
