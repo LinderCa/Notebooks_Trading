@@ -35,6 +35,7 @@ jobs:
         run: |
           git config --global user.email "casaslinder@gmail.com"
           git config --global user.name "LinderCasas"
+          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/LinderCa/Notebooks_Trading.git
           git add notebooks/data/cb_h.txt
           git commit -m "Actualizar resultados del notebook"
           git push
