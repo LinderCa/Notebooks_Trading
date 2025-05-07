@@ -31,6 +31,7 @@ jobs:
           pip install backtesting
           python -m ipykernel install --user --name python3
           papermill notebooks/BreakOut_Indicator_v9.ipynb /dev/null -k python3
+          papermill notebooks/downloadDataHistYF_final_V1.ipynb /dev/null -k python3
       
       - name: subir cambios al repo
         shell: bash -l {0}
