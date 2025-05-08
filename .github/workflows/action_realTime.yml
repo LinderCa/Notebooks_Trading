@@ -30,7 +30,7 @@ jobs:
           conda install -y pip papermill ipykernel pandas numpy scikit-learn yfinance
           pip install backtesting
           python -m ipykernel install --user --name python3
-          papermill notekooks/downLoadDataRealtimeAlpha_final_V1.ipynb /dev/null -k python3
+          papermill notebooks/downLoadDataRealtimeAlpha_final_V1.ipynb /dev/null -k python3
       - name: subir cambios al repo
         shell: bash -l {0}
         env:
