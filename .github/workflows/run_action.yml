@@ -42,3 +42,4 @@ jobs:
           git add .
           git commit -m "Actualizar resultados del notebook"
           git push https://x-access-token:${TOKEN}@github.com/LinderCa/Notebooks_Trading.git
+          
