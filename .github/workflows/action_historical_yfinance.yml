@@ -1,4 +1,4 @@
-name: Ejecutar Notebook Historical Yfinance 
+name: Run Data Historica Por Hora
 
 on:
   schedule:
