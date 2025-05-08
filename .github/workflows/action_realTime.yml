@@ -1,4 +1,4 @@
-name: Run Data Historica Por Hora
+name: Run Data Real Time Por Hora
 
 on:
   schedule:
