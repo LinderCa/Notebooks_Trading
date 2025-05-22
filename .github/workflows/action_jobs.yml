@@ -63,7 +63,7 @@ jobs:
 
       - name: Instalar dependencias y ejecutar notebook Ruptura canal
         shell: bash -l {0}
-        runs: |
+        run: |
           conda install -y pip papermill ipykernel pandas numpy scikit-learn yfinance
           pip install backtesting
           ython -m ipykernel install --user --name python3
