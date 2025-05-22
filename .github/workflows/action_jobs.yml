@@ -43,7 +43,7 @@ jobs:
           git push https://x-access-token:${TOKEN}@github.com/LinderCa/Notebooks_Trading.git
 
       
-  ruptura canal: 
+  ruptura_canal: 
     needs: realtime_data # Paso que depende del anterior
     runs-on: ubuntu-latest
     steps:
