@@ -76,8 +76,8 @@ jobs:
         run: |
           git config user.email "casaslinder@gmail.com"
           git config user.name "LinderCasas"
-          git pull --rebase
           git add .
-          git commit -m "Actualizar resultados del notebook"
+          git commit -m "Actualizar resultados del notebook" || echo "Nada para comitear"
+          git pull --rebase 
           git push https://x-access-token:${TOKEN}@github.com/LinderCa/Notebooks_Trading.git
                 
