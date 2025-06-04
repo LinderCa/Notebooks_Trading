@@ -2,7 +2,7 @@ name: Run Data Historica Por Hora
 
 on:
   schedule:
-    - cron: "0 12 * * *"  # Cada día a las 12:00 UTC
+    - cron: "******* * **  * * *"  # Cada día a las 12:00 UTC
   workflow_dispatch:      # Para ejecutarlo manualmente
 
 jobs:
