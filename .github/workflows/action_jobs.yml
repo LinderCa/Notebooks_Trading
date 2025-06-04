@@ -2,7 +2,7 @@ name: Run Real Time + Run Ruptura Canal
 
 on:
   schedule:
-    - cron: "0 */2 * * *" # Cada 6 minutos
+    - cron: "****** * * * *" # Cada 6 minutos
   workflow_dispatch:     
 
 jobs:
